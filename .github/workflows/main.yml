@@ -1,0 +1,19 @@
+name: newletter_every_14th_day
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+
+  repository_dispatch:
+    types: manual-trigger
+
+jobs:
+  newsletter:
+    name: newsletter
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: test
+        env:
+          SYMMETRIC_KEY: ${{ secrets.GPG_KEY }}
+        run: echo "안녕하세요?"
