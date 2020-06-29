@@ -13,7 +13,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: test
-        env:
-          SYMMETRIC_KEY: ${{ secrets.GPG_KEY }}
-        run: echo "안녕하세요?"
+      - name: set
+        id: var
+        run: |
+          echo "::set-output name=one::'안녕하세요?'"
+          echo "::set-output name=two::'뉘신지...'"
+          echo "::set-output name=three::'너 뭐냥'" 
+          
+      - name: print
+        run: echo "${{ steps.var.outputs.one }} . ${{ steps.var.outputs.two }} . ${{ steps.var.outputs.three }}"
